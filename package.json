@@ -1,0 +1,26 @@
+{
+  "name": "dmw-be",
+  "version": "1.0.0",
+  "description": "Backend for dmw",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node app.js",
+    "dev": "NODE_ENV=development nodemon app.js"
+  },
+  "author": "The Mighty Eagle",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "google-auth-library": "^8.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
+  }
+}
