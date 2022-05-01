@@ -78,7 +78,6 @@ export const GoogleAccount = async (req, res) => {
 export const IsLoggedIn = async (req, res, next) => {
   try {
     if (req.headers.authenticatedby === "jwt") {
-      console.log("hLLOE");
       const userId = isAuth(req, res);
       if (userId) {
         const account = await Account.findById(userId);
