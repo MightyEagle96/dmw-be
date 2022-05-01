@@ -14,6 +14,7 @@ const accountSchema = new Schema({
   password: { type: String },
   role: String,
   profilePhoto: String,
+  phoneNumber: String,
 });
 
 accountSchema.pre("save", async function (next) {

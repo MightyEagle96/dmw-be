@@ -78,6 +78,7 @@ export const GoogleAccount = async (req, res) => {
 export const IsLoggedIn = async (req, res, next) => {
   try {
     if (req.headers.authenticatedby === "jwt") {
+      console.log("hLLOE");
       const userId = isAuth(req, res);
       if (userId) {
         const account = await Account.findById(userId);
@@ -89,9 +90,18 @@ export const IsLoggedIn = async (req, res, next) => {
       const account = await Account.findOne({ email });
       req.account = account;
       next();
-    } else return res.status(401).json({ message: "You are not logged in" });
+    } else if (req.headers.authorization) {
+      const userId = isAuth(req, res);
+      if (userId) {
+        const account = await Account.findById(userId);
+        req.account = account;
+      }
+      next();
+    } else {
+      return res.status(401).json({ message: "You are not logged in" });
+    }
   } catch (error) {
-    return res.status(401).json({ message: "invalid token" });
+    return res.status(401).json({ message: "session expired" });
   }
 };
 

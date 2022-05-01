@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(router);
-const PORT = process.env.PORT || 3112;
+const PORT = process.env.PORT || 3090;
 
 app.listen(PORT, () => {
   console.log("App is listening");
