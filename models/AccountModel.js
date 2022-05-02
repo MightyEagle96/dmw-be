@@ -15,6 +15,10 @@ const accountSchema = new Schema({
   role: String,
   profilePhoto: String,
   phoneNumber: String,
+  bankName: String,
+  accountNumber: String,
+  newAccount: Boolean,
+  createdOn: { type: Date, default: new Date() },
 });
 
 accountSchema.pre("save", async function (next) {
