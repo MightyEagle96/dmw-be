@@ -5,7 +5,10 @@ import {
   Login,
   RestrictTo,
 } from "./authentication/AuthController.js";
-import { ViewSubcribers } from "./controllers/SubscriberController.js";
+import {
+  CreateSubscriber,
+  ViewSubcribers,
+} from "./controllers/SubscriberController.js";
 
 const router = express.Router();
 
@@ -14,6 +17,7 @@ router
   .post("/login", Login)
   .post("/createAccount", CreateAccount)
 
-  .get("/viewSubscribers", IsLoggedIn, RestrictTo("admin"), ViewSubcribers);
+  .get("/viewSubscribers", IsLoggedIn, RestrictTo("admin"), ViewSubcribers)
+  .post("/addNewSubscriber", IsLoggedIn, RestrictTo("admin"), CreateSubscriber);
 
 export default router;
