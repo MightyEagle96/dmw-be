@@ -6,7 +6,13 @@ import {
   RestrictTo,
 } from "./authentication/AuthController.js";
 import {
+  AdminNotifications,
+  ApproveDeposit,
+} from "./controllers/NotificationController.js";
+import {
   CreateSubscriber,
+  MakeDeposit,
+  SubscriberRecords,
   ViewSubcribers,
 } from "./controllers/SubscriberController.js";
 
@@ -18,6 +24,27 @@ router
   .post("/createAccount", CreateAccount)
 
   .get("/viewSubscribers", IsLoggedIn, RestrictTo("admin"), ViewSubcribers)
-  .post("/addNewSubscriber", IsLoggedIn, RestrictTo("admin"), CreateSubscriber);
+  .post("/addNewSubscriber", IsLoggedIn, RestrictTo("admin"), CreateSubscriber)
+
+  .post("/makeDeposit", IsLoggedIn, RestrictTo("subscriber"), MakeDeposit)
+  .get(
+    "/subscriberRecords",
+    IsLoggedIn,
+    RestrictTo("subscriber"),
+    SubscriberRecords
+  )
+
+  .get(
+    "/adminNotifications",
+    IsLoggedIn,
+    RestrictTo("admin"),
+    AdminNotifications
+  )
+  .patch(
+    "/approveDeposit/:id",
+    IsLoggedIn,
+    RestrictTo("admin"),
+    ApproveDeposit
+  );
 
 export default router;
