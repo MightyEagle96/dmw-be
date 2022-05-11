@@ -12,7 +12,9 @@ import {
 import {
   CreateSubscriber,
   MakeDeposit,
+  PendingTransactions,
   SubscriberRecords,
+  SubscriberTotal,
   ViewSubcribers,
 } from "./controllers/SubscriberController.js";
 
@@ -40,11 +42,19 @@ router
     RestrictTo("admin"),
     AdminNotifications
   )
-  .patch(
-    "/approveDeposit/:id",
+  .patch("/approveDeposit/:id", IsLoggedIn, RestrictTo("admin"), ApproveDeposit)
+
+  .get(
+    "/subscriberTotal",
     IsLoggedIn,
-    RestrictTo("admin"),
-    ApproveDeposit
+    RestrictTo("subscriber"),
+    SubscriberTotal
+  )
+  .get(
+    "/pendingTransactions",
+    IsLoggedIn,
+    RestrictTo("subscriber"),
+    PendingTransactions
   );
 
 export default router;

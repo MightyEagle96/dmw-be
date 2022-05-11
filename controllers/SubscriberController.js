@@ -33,6 +33,39 @@ export const MakeDeposit = async (req, res) => {
 };
 
 export const SubscriberRecords = async (req, res) => {
-  const records = await DepositModel.find(req.query).populate("subscriber");
+  const records = await (
+    await DepositModel.find(req.query).populate("subscriber")
+  ).reverse();
   res.json({ records });
+};
+
+export const SubscriberTotal = async (req, res) => {
+  try {
+    let total = 0;
+    const records = await DepositModel.find({
+      subscriber: req.account._id,
+      approved: true,
+    });
+
+    records.forEach((record) => (total += record.amount));
+    res.json({ total });
+  } catch (error) {
+    ErrorHandler(error, res);
+  }
+};
+
+export const PendingTransactions = async (req, res) => {
+  try {
+    let total = 0;
+
+    const records = await DepositModel.find({
+      subscriber: req.account._id,
+      approved: false,
+    });
+
+    total = records.length;
+    res.json({ total });
+  } catch (error) {
+    ErrorHandler(error, res);
+  }
 };
