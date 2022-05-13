@@ -5,6 +5,7 @@ import {
   Login,
   RestrictTo,
 } from "./authentication/AuthController.js";
+import { GetSubscriber, TotalAmount } from "./controllers/AdminController.js";
 import {
   AdminNotifications,
   ApproveDeposit,
@@ -32,7 +33,7 @@ router
   .get(
     "/subscriberRecords",
     IsLoggedIn,
-    RestrictTo("subscriber"),
+    RestrictTo("subscriber", "admin"),
     SubscriberRecords
   )
 
@@ -55,6 +56,9 @@ router
     IsLoggedIn,
     RestrictTo("subscriber"),
     PendingTransactions
-  );
+  )
+
+  .get("/totalAmount", IsLoggedIn, RestrictTo("admin"), TotalAmount)
+  .get("/subscriber/:id", IsLoggedIn, RestrictTo("admin"), GetSubscriber);
 
 export default router;

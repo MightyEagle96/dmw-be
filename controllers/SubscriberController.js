@@ -33,10 +33,9 @@ export const MakeDeposit = async (req, res) => {
 };
 
 export const SubscriberRecords = async (req, res) => {
-  const records = await (
-    await DepositModel.find(req.query).populate("subscriber")
-  ).reverse();
-  res.json({ records });
+  const records = await DepositModel.find(req.query).populate("subscriber");
+  // .reverse();
+  res.json({ records: records.reverse() });
 };
 
 export const SubscriberTotal = async (req, res) => {
