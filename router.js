@@ -5,7 +5,11 @@ import {
   Login,
   RestrictTo,
 } from "./authentication/AuthController.js";
-import { GetSubscriber, TotalAmount } from "./controllers/AdminController.js";
+import {
+  CreditSubscriber,
+  GetSubscriber,
+  TotalAmount,
+} from "./controllers/AdminController.js";
 import {
   AdminNotifications,
   ApproveDeposit,
@@ -57,8 +61,8 @@ router
     RestrictTo("subscriber"),
     PendingTransactions
   )
-
   .get("/totalAmount", IsLoggedIn, RestrictTo("admin"), TotalAmount)
-  .get("/subscriber/:id", IsLoggedIn, RestrictTo("admin"), GetSubscriber);
+  .get("/subscriber/:id", IsLoggedIn, RestrictTo("admin"), GetSubscriber)
+  .post("/creditSubscriber", IsLoggedIn, RestrictTo("admin"), CreditSubscriber);
 
 export default router;
