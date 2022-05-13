@@ -41,10 +41,13 @@ export const SubscriberRecords = async (req, res) => {
 export const SubscriberTotal = async (req, res) => {
   try {
     let total = 0;
-    const records = await DepositModel.find({
-      subscriber: req.account._id,
-      approved: true,
-    });
+    const records =
+      req.account.role === "subscriber"
+        ? await DepositModel.find({
+            subscriber: req.account._id,
+            approved: true,
+          })
+        : await DepositModel.find({ ...req.query, approved: true });
 
     records.forEach((record) => (total += record.amount));
     res.json({ total });

@@ -48,7 +48,7 @@ router
   .get(
     "/subscriberTotal",
     IsLoggedIn,
-    RestrictTo("subscriber"),
+    RestrictTo("subscriber", "admin"),
     SubscriberTotal
   )
   .get(
