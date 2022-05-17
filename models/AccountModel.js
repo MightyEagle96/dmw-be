@@ -19,6 +19,8 @@ const accountSchema = new Schema({
   accountNumber: String,
   newAccount: Boolean,
   createdOn: { type: Date, default: new Date() },
+  os: String,
+  version: String,
 });
 
 accountSchema.pre("save", async function (next) {
